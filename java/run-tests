@@ -1,0 +1,10 @@
+#! /usr/bin/env bash
+set -euo pipefail
+
+# A command-line tool that runs the DropboxContentHasher tests.
+
+[ ! -e out ] || rm -r out
+mkdir -p out
+javac -d out src/*.java
+
+exec java -cp out RunTests "$@"
