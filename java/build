@@ -1,0 +1,7 @@
+#! /usr/bin/env bash
+set -euo pipefail
+
+[[ ! -e out ]] || rm -r out
+mkdir -p out
+touch out/stamp
+javac -d out src/*.java

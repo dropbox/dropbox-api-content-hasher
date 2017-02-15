@@ -3,9 +3,5 @@ set -euo pipefail
 
 # A command-line tool that computes the Dropbox-Content-Hash of the given file.
 
-[ ! -e out ] || rm -r out
-mkdir -p out
-javac -d out src/*.java
-
+./ensure-built
 exec java -cp out HashFile "$@"
-

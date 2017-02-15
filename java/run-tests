@@ -3,8 +3,5 @@ set -euo pipefail
 
 # A command-line tool that runs the DropboxContentHasher tests.
 
-[ ! -e out ] || rm -r out
-mkdir -p out
-javac -d out src/*.java
-
+./ensure-built
 exec java -cp out RunTests "$@"

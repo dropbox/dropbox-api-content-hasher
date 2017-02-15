@@ -1,0 +1,12 @@
+#! /usr/bin/env bash
+set -euo pipefail
+
+rebuild=true
+if [[ -f out/stamp ]]; then
+    if [[ "$(find build src -newer "out/stamp" | head -c 1)" == "" ]]; then
+        rebuild=false
+    fi
+fi
+if $rebuild; then
+    ./build
+fi
