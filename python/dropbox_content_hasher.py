@@ -8,7 +8,7 @@ class DropboxContentHasher(object):
     """
     Computes a hash using the same algorithm that the Dropbox API uses for the
     the "content_hash" metadata field.
-    
+
     The digest() method returns a raw binary representation of the hash.  The
     hexdigest() convenience method returns a hexadecimal-encoded version, which
     is what the "content_hash" metadata field uses.
