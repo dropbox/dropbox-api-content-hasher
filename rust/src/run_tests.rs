@@ -8,7 +8,7 @@ extern crate sha2;
 use digest::Digest;
 use std::io::Write as io_Write;
 use rand::Rng;
-use dropbox_content_hasher::{DropboxContentHasher, BLOCK_SIZE, hex};
+use dropbox_content_hasher::{DropboxContentHasher, BLOCK_SIZE};
 
 fn main() {
     let mut args = std::env::args();
@@ -64,7 +64,7 @@ fn reference_hasher(data: &[u8]) -> String {
         block_hasher.input(chunk);
         overall_hasher.input(block_hasher.result().as_slice());
     }
-    hex(overall_hasher.result().as_slice())
+    return format!("{:x}", overall_hasher.result());
 }
 
 fn check(data: &[u8], chunk_sizes: &[usize]) -> bool {
@@ -81,7 +81,7 @@ fn check(data: &[u8], chunk_sizes: &[usize]) -> bool {
         total_length += chunk_size;
     }
 
-    let result = hex(hasher.result().as_slice());
+    let result = format!("{:x}", hasher.result());
     let reference = reference_hasher(data.split_at(total_length).0);
 
     let passed = result == reference;

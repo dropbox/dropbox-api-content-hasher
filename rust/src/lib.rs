@@ -2,7 +2,6 @@ extern crate digest;
 extern crate sha2;
 extern crate generic_array;
 
-use std::fmt::Write;
 use digest::Digest;
 use sha2::Sha256;
 use generic_array::{GenericArray};
@@ -31,8 +30,8 @@ pub const BLOCK_SIZE: usize = 4 * 1024 * 1024;
 /// }
 /// drop(f);
 ///
-/// let raw_hash = hasher.result();
-/// println!("{}", hex(raw_hash.as_slice()));
+/// let hex_hash = format!("{:x}", hasher.result());
+/// println!("{}", hex_hash);
 /// ```
 
 #[derive(Clone, Copy)]
@@ -50,14 +49,6 @@ impl DropboxContentHasher {
             block_pos: 0,
         }
     }
-}
-
-pub fn hex(raw: &[u8]) -> String {
-    let mut hex = String::with_capacity(raw.len() * 2);
-    for &byte in raw {
-        write!(&mut hex, "{:02x}", byte).unwrap();
-    }
-    hex
 }
 
 impl Default for DropboxContentHasher {

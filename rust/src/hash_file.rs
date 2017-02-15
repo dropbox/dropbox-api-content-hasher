@@ -6,7 +6,7 @@ extern crate dropbox_content_hasher;
 use std::io::Write as io_Write;
 use std::io::Read as io_Read;
 use digest::Digest;
-use dropbox_content_hasher::{DropboxContentHasher, hex};
+use dropbox_content_hasher::DropboxContentHasher;
 
 fn main() {
     let mut args = std::env::args();
@@ -28,6 +28,6 @@ fn main() {
     }
     drop(f);
 
-    let raw_hash = hasher.result();
-    println!("{}", hex(raw_hash.as_slice()));
+    let hex_hash = format!("{:x}", hasher.result());
+    println!("{}", hex_hash);
 }
