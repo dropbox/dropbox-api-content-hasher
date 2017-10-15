@@ -1,6 +1,6 @@
 <?php
 
-function dropbox_hash_stream($stream, $chunksize = 1024)
+function dropbox_hash_stream($stream, $chunksize = 8 * 1024)
 {
     // Based on:
     // https://www.dropbox.com/developers/reference/content-hash
