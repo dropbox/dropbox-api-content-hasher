@@ -16,11 +16,11 @@ public class RunTests
         int B = DropboxContentHasher.BLOCK_SIZE;
 
         int[][] tests = {
-            //new[] {0},
-            //new[] {100},
-            //new[] {100, 10},
-            //new[] {B-1},
-            //new[] {B},
+            new[] {0},
+            new[] {100},
+            new[] {100, 10},
+            new[] {B-1},
+            new[] {B},
             new[] {B+1},
 
             new[] {B-2, 1},
