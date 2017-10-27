@@ -4,7 +4,7 @@ extern crate generic_array;
 
 use digest::Digest;
 use sha2::Sha256;
-use generic_array::{GenericArray};
+use generic_array::GenericArray;
 
 pub const BLOCK_SIZE: usize = 4 * 1024 * 1024;
 
@@ -55,11 +55,8 @@ impl Default for DropboxContentHasher {
     fn default() -> Self { Self::new() }
 }
 
-impl Digest for DropboxContentHasher {
-    type OutputSize = <Sha256 as Digest>::OutputSize;
-    type BlockSize = <Sha256 as Digest>::BlockSize;
-
-    fn input(&mut self, mut input: &[u8]) {
+impl digest::Input for DropboxContentHasher {
+    fn process(&mut self, mut input: &[u8]) {
         while input.len() > 0 {
             if self.block_pos == BLOCK_SIZE {
                 self.overall_hasher.input(self.block_hasher.result().as_slice());
@@ -75,11 +72,19 @@ impl Digest for DropboxContentHasher {
             input = rest;
         }
     }
+}
 
-    fn result(mut self) -> GenericArray<u8, Self::OutputSize> {
+impl digest::FixedOutput for DropboxContentHasher {
+    type OutputSize = <Sha256 as digest::FixedOutput>::OutputSize;
+
+    fn fixed_result(mut self) -> GenericArray<u8, Self::OutputSize> {
         if self.block_pos > 0 {
             self.overall_hasher.input(self.block_hasher.result().as_slice());
         }
         self.overall_hasher.result()
     }
+}
+
+impl digest::BlockInput for DropboxContentHasher {
+    type BlockSize = <Sha256 as digest::BlockInput>::BlockSize;
 }
