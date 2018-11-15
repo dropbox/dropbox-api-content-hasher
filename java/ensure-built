@@ -2,8 +2,9 @@
 set -euo pipefail
 
 rebuild=true
-if [[ -f out/stamp ]]; then
-    if [[ "$(find build src -newer "out/stamp" | head -c 1)" == "" ]]; then
+if [[ -f out/stamp-post ]]; then
+    # Make sure all input files haven't changed since the last build *started*.
+    if [[ "$(find build src -newer "out/stamp-pre" | head -c 1)" == "" ]]; then
         rebuild=false
     fi
 fi

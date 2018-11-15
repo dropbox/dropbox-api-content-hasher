@@ -3,5 +3,6 @@ set -euo pipefail
 
 [[ ! -e out ]] || rm -r out
 mkdir -p out
-touch out/stamp
+touch out/stamp-pre
 javac -d out src/*.java
+touch out/stamp-post
