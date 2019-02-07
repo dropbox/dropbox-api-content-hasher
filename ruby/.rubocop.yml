@@ -1,0 +1,46 @@
+AllCops:
+  TargetRubyVersion: 2.3
+
+##################### Styles ##################################
+
+Style/Documentation:
+  Enabled: false
+
+Style/SymbolArray:
+  Enabled: false
+
+Style/ClassAndModuleChildren:
+  Exclude:
+    - "app/controllers/*_controller.rb"
+    - "app/controllers/**/*_controller.rb"
+
+#################### Lint ##################################
+
+Lint/AmbiguousBlockAssociation:
+  Enabled: false
+
+##################### Metrics ##################################
+
+Metrics/LineLength:
+  Max: 110
+
+Metrics/ClassLength:
+  Max: 200
+
+Metrics/ModuleLength:
+  Max: 200
+  Exclude:
+    - "**/*_spec.rb"
+
+Metrics/BlockLength:
+  Max: 50
+  Exclude:
+    - "**/*_spec.rb"
+
+##################### Rails ##################################
+
+Rails:
+  Enabled: true
+
+Rails/SkipsModelValidations:
+  Enabled: false
