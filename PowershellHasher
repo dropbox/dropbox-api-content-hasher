@@ -1,0 +1,26 @@
+function DBHash{
+    Param    (
+    [Parameter(Mandatory=$true)][string]$inFile
+    )
+  $bufSize = 4194304
+  $stream = [System.IO.File]::OpenRead($inFile)
+  $algorithm = [Security.Cryptography.HashAlgorithm]::Create('sha256')
+  $barr = New-Object byte[] $($bufSize)
+
+  while ($bytesRead = $stream.Read($barr, 0, $bufSize)){
+        if($bytesRead -eq $bufSize){
+            $OneHash = $algorithm.ComputeHash($barr)
+        }else{
+            $OneHash = $algorithm.ComputeHash($barr[0..$($bytesRead-1)])
+        }
+        $AllHash += $OneHash
+    }
+    $OneHash = $algorithm.ComputeHash($AllHash) #Hash in Binary
+    return $(-Join ($OneHash | ForEach {"{0:x2}" -f $_})) #Hash in Hex
+}
+
+
+
+#Example of use
+$inFile = "C:\milky-way-nasa.jpg"
+DBHash $inFile
