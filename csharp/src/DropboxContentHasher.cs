@@ -20,7 +20,7 @@ using System.Security.Cryptography;
 ///     while (true)
 ///     {
 ///         int n = file.Read(buf, 0, buf.Length);
-///         if (n &lt;= 0) break;  // EOF
+///         if (n <= 0) break;  // EOF
 ///         hasher.TransformBlock(buf, 0, n, buf, 0);
 ///     }
 /// }
