@@ -1,3 +1,6 @@
+#!/bin/bash
+#  Computes a hash using the same algorithm that the Dropbox API uses for the
+#  the "content_hash" metadata field.
 if [ -f "$1" ]; then
    BlockCount=$((($(stat -c %s "$1") + 4194303) / 4194304))
    AllSha=""
