@@ -8,4 +8,4 @@ Requirements:
 
 To run:
 
-# DropBoxCheck.sh <filename>
+# DropBoxCheck.sh filename
