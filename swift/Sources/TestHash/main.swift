@@ -41,7 +41,7 @@ public struct TestHash {
             [5, 5, 5, 3*b, 5, 5, 5, 3*b],
         ]
 
-        let longestLength = tests.max(by: {$1.count > $0.count})!.count
+        let longestLength = tests.map{ $0.reduce(0, +) }.max()!
 
         print("generating random data")
 
